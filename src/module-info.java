@@ -4,5 +4,6 @@ module CashFlow {
     requires javafx.fxml;
 
     opens main;
+    opens main.controller;
 
 }
