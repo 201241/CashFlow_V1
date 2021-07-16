@@ -25,13 +25,11 @@ public class Controller {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Finanzas");
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
-
