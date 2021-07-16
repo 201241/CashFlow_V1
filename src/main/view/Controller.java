@@ -18,7 +18,6 @@ public class Controller {
     void btnIniciarCash(ActionEvent event) {
 
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menuCash.fxml"));
             Parent root = null;
             root = loader.load();
