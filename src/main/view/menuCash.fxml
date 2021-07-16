@@ -42,6 +42,7 @@
       <ImageView fx:id="indicador" fitHeight="140.0" fitWidth="176.0" layoutX="518.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@3.png" />
+            
          </image>
       </ImageView>
    </children>
