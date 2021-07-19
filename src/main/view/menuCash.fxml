@@ -50,7 +50,7 @@
             <Image url="@pixlr-bg-result%20(5).png" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="400.0" prefWidth="717.0" style="-fx-background-color: #dae8ec;">
+      <AnchorPane fx:id="menuCategoria" prefHeight="400.0" prefWidth="717.0" style="-fx-background-color: #dae8ec;" visible="false">
          <children>
             <AnchorPane prefHeight="47.0" prefWidth="717.0" style="-fx-background-color: #929fc9; -fx-background-radius: 0;">
                <children>

@@ -4,54 +4,50 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class menuController {
 
     @FXML
-    private ImageView categoria;
-    @FXML
-    private ImageView flujo;
-    @FXML
-    private ImageView indicador;
-    @FXML
     private Button btncategoria;
+
     @FXML
     private Button btnflujo;
+
     @FXML
     private Button btnindicador;
+
     @FXML
     private Label lblfinanzas;
 
-
-    //METODOS PARA CADA BOTÓN
     @FXML
-    public void iniciarCategoria()
-    {
-        ocultar();
+    private ImageView flujo;
+
+    @FXML
+    private ImageView categoria;
+
+    @FXML
+    private AnchorPane menuCategoria;
+
+    @FXML
+    private Label lblfinanzas1;
+
+    @FXML
+    private Label lblfinanzas11;
+
+    @FXML
+    void iniciarCategoria() {
+        menuCategoria.setVisible(true);
     }
 
     @FXML
-    public void iniciarFlujo()
-    {
-        ocultar();
+    void iniciarFlujo() {
+
     }
 
     @FXML
-    public void iniciarIndicador()
-    {
-        ocultar();
-    }
+    void iniciarIndicador() {
 
-    @FXML
-    public void ocultar()
-    {
-        categoria.setVisible(false);
-        flujo.setVisible(false);
-        indicador.setVisible(false);
-        btncategoria.setVisible(false);
-        btnflujo.setVisible(false);
-        btnindicador.setVisible(false);
-        lblfinanzas.setVisible(false);
     }
 
 }
