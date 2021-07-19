@@ -2,6 +2,7 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -36,9 +37,6 @@ public class menuController {
 
     @FXML
     private Label lblfinanzas1;
-
-    @FXML
-    private Button cerrarCategorias;
 
     @FXML
     private TableView<?> listaCategoria;
@@ -77,8 +75,58 @@ public class menuController {
     private Button guardarCategoria;
 
     @FXML
+    private Button cerrarCategorias;
+
+    @FXML
+    private AnchorPane menuEfectivo;
+
+    @FXML
+    private Label lblfinanzas12;
+
+    @FXML
+    private TableView<?> tablaEfectivo;
+
+    @FXML
+    private TableColumn<?, ?> colFecha;
+
+    @FXML
+    private TableColumn<?, ?> colDesEfectivo;
+
+    @FXML
+    private TableColumn<?, ?> colCatEfectivo;
+
+    @FXML
+    private TableColumn<?, ?> colSubEfectivo;
+
+    @FXML
+    private TextField SubCFlujoD;
+
+    @FXML
+    private TextField desFlujoD;
+
+    @FXML
+    private TextField catFlujoD;
+
+    @FXML
+    private TextField cantidadFlujoDinero;
+
+    @FXML
+    private DatePicker fecha;
+
+    @FXML
+    private Button guardarFlujoEfectivo;
+
+    @FXML
+    private Button cerrarEfectivo;
+
+    @FXML
     void cerrarCategoria() {
         menuCategoria.setVisible(false);
+    }
+
+    @FXML
+    void cerrarMenoEfectivo() {
+        menuEfectivo.setVisible(false);
     }
 
     @FXML
@@ -88,7 +136,7 @@ public class menuController {
 
     @FXML
     void iniciarFlujo() {
-
+        menuEfectivo.setVisible(true);
     }
 
     @FXML
