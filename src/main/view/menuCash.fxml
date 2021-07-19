@@ -59,7 +59,6 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="cerrarCategorias" layoutX="677.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-radius: 50; -fx-background-color: #f35b4b;" text="x" textFill="WHITE" />
                </children>
             </AnchorPane>
             <TableView fx:id="listaCategoria" layoutX="17.0" layoutY="94.0" prefHeight="290.0" prefWidth="359.0">
@@ -102,6 +101,7 @@
               </items>
             </MenuButton>
             <Button fx:id="guardarCategoria" layoutX="577.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" style="-fx-background-radius: 10; -fx-background-color: #929fc9;" text="Guardar" textFill="WHITE" />
+            <Button fx:id="cerrarCategorias" layoutX="398.0" layoutY="359.0" mnemonicParsing="false" onAction="#cerrarCategoria" style="-fx-background-radius: 10; -fx-background-color: #f35b4b;" text="Regresar al menu" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
