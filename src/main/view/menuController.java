@@ -1,11 +1,13 @@
 package main.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -120,28 +122,35 @@ public class menuController {
     private Button cerrarEfectivo;
 
     @FXML
-    void cerrarCategoria() {
+    private RadioButton btnEntradaDinero;
+
+    @FXML
+    private RadioButton btnSalidaDinero;
+
+    @FXML
+    void cerrarCategoria(ActionEvent event) {
         menuCategoria.setVisible(false);
     }
 
     @FXML
-    void cerrarMenoEfectivo() {
+    void cerrarMenoEfectivo(ActionEvent event) {
         menuEfectivo.setVisible(false);
     }
 
     @FXML
-    void iniciarCategoria() {
+    void iniciarCategoria(ActionEvent event) {
         menuCategoria.setVisible(true);
     }
 
     @FXML
-    void iniciarFlujo() {
+    void iniciarFlujo(ActionEvent event) {
         menuEfectivo.setVisible(true);
     }
 
     @FXML
-    void iniciarIndicador() {
+    void iniciarIndicador(ActionEvent event) {
 
     }
 
 }
+
