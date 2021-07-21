@@ -52,7 +52,7 @@
             <Image url="@pixlr-bg-result%20(5).png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="menuCategoria" prefHeight="521.0" prefWidth="724.0" style="-fx-background-color: #dae8ec;" visible="false">
+      <AnchorPane fx:id="menuCategoria" prefHeight="521.0" prefWidth="730.0" style="-fx-background-color: #dae8ec;" visible="false">
          <children>
             <AnchorPane prefHeight="47.0" prefWidth="724.0" style="-fx-background-color: #929fc9; -fx-background-radius: 0;">
                <children>
@@ -175,6 +175,100 @@
                   <Font name="DejaVu Sans Mono Bold" size="13.0" />
                </font>
             </RadioButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="vistaUnoIndicadores" layoutX="-3.0" layoutY="-2.0" prefHeight="523.0" prefWidth="594.0" style="-fx-background-color: #f2f1ec;" visible="false">
+         <children>
+            <AnchorPane layoutX="-8.0" prefHeight="47.0" prefWidth="739.0" style="-fx-background-color: #a9b6d9;" />
+            <Label fx:id="lblfinanzas121" layoutX="24.0" layoutY="13.0" text="Indicadores de Dinero" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRegistroInf" layoutX="24.0" layoutY="239.0" mnemonicParsing="false" onAction="#llamarRegistroDeInformacion" prefHeight="100.0" prefWidth="351.0" style="-fx-background-radius: 10; -fx-background-color: #567af4;" text="Registro de Información" textFill="WHITE">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnReportes" layoutX="456.0" layoutY="239.0" mnemonicParsing="false" onAction="#llamarReportes" prefHeight="100.0" prefWidth="255.0" style="-fx-background-radius: 10; -fx-background-color: #567af4;" text="Reportes" textFill="WHITE">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="20.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="-8.0" layoutY="476.0" prefHeight="47.0" prefWidth="739.0" style="-fx-background-color: #a9b6d9;">
+               <children>
+                  <Button fx:id="cerrarIndicadores" layoutX="572.0" layoutY="7.0" mnemonicParsing="false" onAction="#cerrarIndicadores" prefHeight="33.0" prefWidth="153.0" style="-fx-background-radius: 10; -fx-background-color: #f35b4b;" text="Regresar al menu" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="informacionIndicadoresDinero" layoutX="-3.0" prefHeight="521.0" prefWidth="730.0" style="-fx-background-color: #dadada;" visible="false">
+         <children>
+            <AnchorPane prefHeight="39.0" prefWidth="733.0" style="-fx-background-color: #45494a;">
+               <children>
+                  <Label fx:id="lblfinanzas111" layoutX="14.0" layoutY="9.0" text="Información - Indicadores de Dinero" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Text fill="#4b4d49" layoutX="47.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Razón Social:">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#4b4d49" layoutX="47.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No. Semana:">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#4b4d49" layoutX="47.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monto $:">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="montoCuenta" layoutX="196.0" layoutY="253.0" />
+            <TextField fx:id="razonSocialCuenta" layoutX="196.0" layoutY="204.0" />
+            <DatePicker fx:id="fechaCuenta" layoutX="196.0" layoutY="152.0" prefHeight="26.0" prefWidth="171.0" />
+            <Text fill="#4b4d49" layoutX="14.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione el tipo de cuenta a realizar:" wrappingWidth="365.0">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <RadioButton fx:id="cuentasPagar" layoutX="31.0" layoutY="386.0" mnemonicParsing="false" text="Cuentas por pagar" textFill="#ee0000" />
+            <RadioButton fx:id="cuentaCobrar" layoutX="229.0" layoutY="386.0" mnemonicParsing="false" text="Cuentas por cobrar" textFill="#1cd02e" />
+            <Text fill="#4b4d49" layoutX="133.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cuentas">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="30.0" />
+               </font>
+            </Text>
+            <Button fx:id="guardarCuentas" layoutX="129.0" layoutY="425.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: #99d2e1;" text="Guardar" textFill="WHITE" />
+            <Button fx:id="cerrarInformacion" layoutX="283.0" layoutY="468.0" mnemonicParsing="false" onAction="#cerrarInformacion" prefHeight="39.0" prefWidth="193.0" style="-fx-background-radius: 10; -fx-background-color: #f35b4b;" text="Regresar al menu" textFill="WHITE" />
+            <Text fill="#4b4d49" layoutX="392.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#4b4d49" layoutX="392.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No. Semana:">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#4b4d49" layoutX="392.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monto $:">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="montoBanco" layoutX="541.0" layoutY="253.0" />
+            <TextField fx:id="descripcionBanco" layoutX="541.0" layoutY="204.0" />
+            <DatePicker fx:id="fechaBanco" layoutX="541.0" layoutY="152.0" prefHeight="26.0" prefWidth="171.0" />
+            <Text fill="#4b4d49" layoutX="478.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bancos">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="30.0" />
+               </font>
+            </Text>
+            <Button fx:id="guardarBancos" layoutX="491.0" layoutY="425.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: #99d2e1;" text="Guardar" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

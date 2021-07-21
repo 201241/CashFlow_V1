@@ -128,8 +128,72 @@ public class menuController {
     private RadioButton btnSalidaDinero;
 
     @FXML
+    private AnchorPane vistaUnoIndicadores;
+
+    @FXML
+    private Label lblfinanzas121;
+
+    @FXML
+    private Button btnRegistroInf;
+
+    @FXML
+    private Button btnReportes;
+
+    @FXML
+    private Button cerrarIndicadores;
+
+    @FXML
+    private AnchorPane informacionIndicadoresDinero;
+
+    @FXML
+    private Label lblfinanzas111;
+
+    @FXML
+    private TextField montoCuenta;
+
+    @FXML
+    private TextField razonSocialCuenta;
+
+    @FXML
+    private DatePicker fechaCuenta;
+
+    @FXML
+    private RadioButton cuentasPagar;
+
+    @FXML
+    private RadioButton cuentaCobrar;
+
+    @FXML
+    private Button guardarCuentas;
+
+    @FXML
+    private Button cerrarInformacion;
+
+    @FXML
+    private TextField montoBanco;
+
+    @FXML
+    private TextField descripcionBanco;
+
+    @FXML
+    private DatePicker fechaBanco;
+
+    @FXML
+    private Button guardarBancos;
+
+    @FXML
     void cerrarCategoria(ActionEvent event) {
         menuCategoria.setVisible(false);
+    }
+
+    @FXML
+    void cerrarIndicadores(ActionEvent event) {
+        vistaUnoIndicadores.setVisible(false);
+    }
+
+    @FXML
+    void cerrarInformacion(ActionEvent event) {
+        informacionIndicadoresDinero.setVisible(false);
     }
 
     @FXML
@@ -149,8 +213,19 @@ public class menuController {
 
     @FXML
     void iniciarIndicador(ActionEvent event) {
+        vistaUnoIndicadores.setVisible(true);
+    }
+
+    @FXML
+    void llamarRegistroDeInformacion(ActionEvent event) {
+        informacionIndicadoresDinero.setVisible(true);
+    }
+
+    @FXML
+    void llamarReportes(ActionEvent event) {
 
     }
 
 }
+
 
