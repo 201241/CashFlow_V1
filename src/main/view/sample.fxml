@@ -26,7 +26,7 @@
       </Text>
       <Button fx:id="btnIniciar" layoutX="324.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnIniciarCash" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 10; -fx-background-color: #c5db5d;" text="Iniciar" textFill="WHITE">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="17.0" />
          </font>
       </Button>
       <Text fill="#ebebeb" layoutX="266.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido">
