@@ -1,5 +1,6 @@
 package main.view;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -226,6 +227,12 @@ public class menuController {
 
     }
 
+    @FXML
+    public void cerrarApp()
+    {
+        Platform.exit();
+        System.exit(1);
+    }
 }
 
 
