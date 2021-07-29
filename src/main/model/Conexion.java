@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class Conexion {
 
-    private String url= "http://167.172.146.90:3005/categoria/getCategorias";
+    private String url= "http://localhost:3005/categoria/getCategorias";
     private StringBuilder response = new StringBuilder();
 
     public Conexion (){
