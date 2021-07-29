@@ -3,6 +3,7 @@ package main.view;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -15,7 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class menuController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class menuController implements Initializable
+{
 
     @FXML
     private Button btncategoria;
@@ -234,6 +239,11 @@ public class menuController {
     {
         Platform.exit();
         System.exit(1);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
 
