@@ -102,6 +102,13 @@ public class menuController {
     private TableColumn<?, ?> colSubEfectivo;
 
     @FXML
+    private TextField txtsemanaCuentas;
+    @FXML
+    private TextField txtsemanaBancos;
+
+
+
+    @FXML
     private TextField SubCFlujoD;
 
     @FXML
@@ -113,8 +120,7 @@ public class menuController {
     @FXML
     private TextField cantidadFlujoDinero;
 
-    @FXML
-    private DatePicker fecha;
+
 
     @FXML
     private Button guardarFlujoEfectivo;
@@ -156,9 +162,6 @@ public class menuController {
     private TextField razonSocialCuenta;
 
     @FXML
-    private DatePicker fechaCuenta;
-
-    @FXML
     private RadioButton cuentasPagar;
 
     @FXML
@@ -176,8 +179,7 @@ public class menuController {
     @FXML
     private TextField descripcionBanco;
 
-    @FXML
-    private DatePicker fechaBanco;
+
 
     @FXML
     private Button guardarBancos;
