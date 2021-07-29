@@ -330,4 +330,15 @@ public class menuController implements Initializable
         colFecha.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().fechaProperty());
         colDesEfectivo.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
     }
+
+
+    public void guardarCuenta()
+    {
+
+    }
+
+    public void guardarBanco()
+    {
+
+    }
 }

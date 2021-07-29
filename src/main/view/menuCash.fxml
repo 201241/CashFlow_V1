@@ -57,7 +57,7 @@
       </ImageView>
       <AnchorPane fx:id="menuCategoria" prefHeight="550.0" prefWidth="730.0" style="-fx-background-color: #dae8ec;" visible="false">
          <children>
-            <AnchorPane prefHeight="47.0" prefWidth="724.0" style="-fx-background-color: #929fc9; -fx-background-radius: 0;" visible="false">
+            <AnchorPane prefHeight="47.0" prefWidth="730.0" style="-fx-background-color: #929fc9; -fx-background-radius: 0;">
                <children>
                   <Label fx:id="lblfinanzas1" layoutX="14.0" layoutY="13.0" text="Categorías (GAOs, Costos de Venta e Ingresos)" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -76,7 +76,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label fx:id="lblfinanzas11" layoutX="264.0" layoutY="24.0" text="Lista de Categorías" textAlignment="CENTER" textFill="#0880ab">
+            <Label fx:id="lblfinanzas11" layoutX="17.0" layoutY="70.0" text="Lista de Categorías" textAlignment="CENTER" textFill="#0880ab">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -98,7 +98,7 @@
             </Text>
             <TextField fx:id="catSeleccionada" layoutX="532.0" layoutY="227.0" />
             <TextField fx:id="subCatSeleccionada" layoutX="532.0" layoutY="278.0" />
-            <Button fx:id="guardarCategoria" layoutX="569.0" layoutY="476.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: springgreen;" text="Guardar" textFill="WHITE">
+            <Button fx:id="guardarCategoria" layoutX="569.0" layoutY="476.0" mnemonicParsing="false" onAction="#guardarCategoria" prefHeight="33.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: springgreen;" text="Guardar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
@@ -148,7 +148,7 @@
             </Text>
             <TextField fx:id="desFlujoD" layoutX="228.0" layoutY="303.0" prefHeight="24.0" prefWidth="171.0" />
             <TextField fx:id="cantidadFlujoDinero" layoutX="228.0" layoutY="395.0" />
-            <Button fx:id="guardarFlujoEfectivo" layoutX="517.0" layoutY="490.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="193.0" style="-fx-background-radius: 10; -fx-background-color: springgreen;" text="Guardar" textFill="WHITE">
+            <Button fx:id="guardarFlujoEfectivo" layoutX="517.0" layoutY="490.0" mnemonicParsing="false" onAction="#guardarFlujoEfectivo" prefHeight="39.0" prefWidth="193.0" style="-fx-background-radius: 10; -fx-background-color: springgreen;" text="Guardar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
@@ -243,14 +243,14 @@
                   <Font name="DejaVu Sans Mono Bold" size="15.0" />
                </font>
             </Text>
-            <RadioButton fx:id="cuentasPagar" layoutX="47.0" layoutY="359.0" mnemonicParsing="false" text="Cuentas por pagar" textFill="#ee0000" />
-            <RadioButton fx:id="cuentaCobrar" layoutX="53.0" layoutY="396.0" mnemonicParsing="false" text="Cuentas por cobrar" textFill="#1cd02e" />
+            <RadioButton fx:id="cuentasPagar" layoutX="47.0" layoutY="360.0" mnemonicParsing="false" text="Cuentas por pagar" textFill="#ee0000" />
+            <RadioButton fx:id="cuentaCobrar" layoutX="44.0" layoutY="391.0" mnemonicParsing="false" text="Cuentas por cobrar" textFill="#1cd02e" />
             <Text fill="#4b4d49" layoutX="47.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cuentas">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="30.0" />
                </font>
             </Text>
-            <Button fx:id="guardarCuentas" layoutX="53.0" layoutY="444.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="145.0" style="-fx-background-radius: 10; -fx-background-color: mediumspringgreen;" text="Guardar" textFill="WHITE">
+            <Button fx:id="guardarCuentas" layoutX="53.0" layoutY="444.0" mnemonicParsing="false" onAction="#guardarCuenta" prefHeight="33.0" prefWidth="145.0" style="-fx-background-radius: 10; -fx-background-color: mediumspringgreen;" text="Guardar Cuenta" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font></Button>
@@ -280,11 +280,11 @@
                   <Font name="DejaVu Sans Mono Bold" size="30.0" />
                </font>
             </Text>
-            <Button fx:id="guardarBancos" layoutX="549.0" layoutY="444.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: mediumspringgreen;" text="Guardar" textFill="WHITE">
+            <Button fx:id="guardarBancos" layoutX="541.0" layoutY="444.0" mnemonicParsing="false" onAction="#guardarBanco" prefHeight="33.0" prefWidth="134.0" style="-fx-background-radius: 10; -fx-background-color: mediumspringgreen;" text="Guardar Banco" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font></Button>
-            <TextField fx:id="fechaCuenta" layoutX="196.0" layoutY="153.0" />
+            <TextField fx:id="txtsemanaCuentas" layoutX="196.0" layoutY="153.0" />
             <TextField fx:id="txtsemanaBancos" layoutX="541.0" layoutY="153.0" />
          </children>
       </AnchorPane>
