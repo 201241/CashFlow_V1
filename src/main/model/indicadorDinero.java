@@ -1,56 +1,84 @@
 package main.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class indicadorDinero {
 
-    private String tipoCuenta;
-    private String noSemana;
-    private String razonSocial;
-    private Double monto;
-    private String idIndicador;
+    private final StringProperty tipoCuenta = new SimpleStringProperty();
+    private final StringProperty noSemana = new SimpleStringProperty();
+    private final StringProperty razonSocial = new SimpleStringProperty();
+    private final StringProperty idIndicador = new SimpleStringProperty();
+    private final DoubleProperty monto = new SimpleDoubleProperty();
 
     indicadorDinero(String tipoCuenta, String noSemana, String razonSocial, Double monto, String idIndicador)
     {
-        this.setTipoCuenta(tipoCuenta);
-        this.setNoSemana(noSemana);
-        this.setRazonSocial(razonSocial);
-        this.setMonto(monto);
-        this.idIndicador=idIndicador;
-    }
-
-    indicadorDinero()
-    {
-
+        this.tipoCuenta.set(tipoCuenta);
+        this.noSemana.set(noSemana);
+        this.razonSocial.set(razonSocial);
+        this.monto.set(monto);
+        this.idIndicador.set(idIndicador);
     }
 
     public String getTipoCuenta() {
+        return tipoCuenta.get();
+    }
+
+    public StringProperty tipoCuentaProperty() {
         return tipoCuenta;
     }
 
     public void setTipoCuenta(String tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
+        this.tipoCuenta.set(tipoCuenta);
     }
 
     public String getNoSemana() {
+        return noSemana.get();
+    }
+
+    public StringProperty noSemanaProperty() {
         return noSemana;
     }
 
     public void setNoSemana(String noSemana) {
-        this.noSemana = noSemana;
+        this.noSemana.set(noSemana);
     }
 
     public String getRazonSocial() {
+        return razonSocial.get();
+    }
+
+    public StringProperty razonSocialProperty() {
         return razonSocial;
     }
 
     public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
+        this.razonSocial.set(razonSocial);
     }
 
-    public Double getMonto() {
+    public String getIdIndicador() {
+        return idIndicador.get();
+    }
+
+    public StringProperty idIndicadorProperty() {
+        return idIndicador;
+    }
+
+    public void setIdIndicador(String idIndicador) {
+        this.idIndicador.set(idIndicador);
+    }
+
+    public double getMonto() {
+        return monto.get();
+    }
+
+    public DoubleProperty montoProperty() {
         return monto;
     }
 
-    public void setMonto(Double monto) {
-        this.monto = monto;
+    public void setMonto(double monto) {
+        this.monto.set(monto);
     }
 }

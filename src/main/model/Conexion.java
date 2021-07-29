@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class Conexion {
 
-    private String url= "http://localhost:3005/categoria/getCategorias";
+    private String url= "http://167.172.146.90:3005/categoria/getCategorias";
     private StringBuilder response = new StringBuilder();
 
     public Conexion (){
@@ -53,22 +53,63 @@ public class Conexion {
         return listaCategoria;
     }
 
-    public void getFlujoEfectivo(){
-        try{
+    public ObservableList<flujoEfectivo> getFlujoEfectivo(){
 
+        System.out.println("datos flujo de efectivo");
+        ObservableList<flujoEfectivo> listaFlujoEfectivo = FXCollections.observableArrayList();
+
+        try{
+            URL nameUrl= new URL(url);
+            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader ra = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String datos;
+            while ((datos = ra.readLine())!=null)
+            {
+                response.append(datos);
+            }
+            ra.close();
+            JSONArray jsonResponse = new JSONArray(response.toString());
+            for (int i = 0; i < jsonResponse.length() ; i++) {
+                JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
+                flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"));
+                listaFlujoEfectivo.add(efectivo);
+            }
+            return listaFlujoEfectivo;
         }
         catch(Exception exception){
-
+            System.out.println(exception);
         }
+        return listaFlujoEfectivo;
     }
 
-    public void getIndicador()
+    public ObservableList<indicadorDinero> getIndicador()
     {
-        try{
+        System.out.println("datos indicadores de dinero");
+        ObservableList<indicadorDinero> listaIndicadorDinero = FXCollections.observableArrayList();
 
+        try{
+            URL nameUrl= new URL(url);
+            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader ri = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String datosIndicador;
+            while ((datosIndicador = ri.readLine())!=null)
+            {
+                response.append(datosIndicador);
+            }
+            ri.close();
+            JSONArray jsonResponse = new JSONArray(response.toString());
+            for (int i = 0; i < jsonResponse.length() ; i++) {
+                JSONObject objectIndicador = jsonResponse.getJSONObject(i);
+                indicadorDinero dinero = new indicadorDinero(objectIndicador.getString("tipoIndicador"),objectIndicador.getString("numeroSemana"), objectIndicador.getString("razonSocial"), objectIndicador.getDouble("monto"), objectIndicador.getString("idIndicadoresDinero"));
+                listaIndicadorDinero.add(dinero);
+            }
+            return listaIndicadorDinero;
         }
         catch(Exception exception){
-
+            System.out.println(exception);
         }
+        return listaIndicadorDinero;
     }
 }

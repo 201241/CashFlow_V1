@@ -19,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import main.model.Categoria;
 import main.model.Conexion;
+import main.model.flujoEfectivo;
+import main.model.indicadorDinero;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -97,19 +99,19 @@ public class menuController implements Initializable
     private Label lblfinanzas12;
 
     @FXML
-    private TableView<?> tablaEfectivo;
+    private TableView<flujoEfectivo> tablaEfectivo;
 
     @FXML
-    private TableColumn<?, ?> colFecha;
+    private TableColumn<?,?> colFecha;
 
     @FXML
-    private TableColumn<?, ?> colDesEfectivo;
+    private TableColumn<flujoEfectivo, String> colDesEfectivo;
 
     @FXML
-    private TableColumn<?, ?> colCatEfectivo;
+    private TableColumn<flujoEfectivo, String> colCatEfectivo;
 
     @FXML
-    private TableColumn<?, ?> colSubEfectivo;
+    private TableColumn<flujoEfectivo, String> colSubEfectivo;
 
     @FXML
     private TextField txtsemanaCuentas;
@@ -195,6 +197,8 @@ public class menuController implements Initializable
     private Button guardarBancos;
 
     ObservableList<Categoria> categoriaObservableList = FXCollections.observableArrayList();
+    ObservableList<flujoEfectivo> efectivoObservableList = FXCollections.observableArrayList();
+    ObservableList<indicadorDinero> dineroObservableList = FXCollections.observableArrayList();
 
 
 //Control Vistas//
@@ -267,9 +271,14 @@ public class menuController implements Initializable
         colSubCat.setCellValueFactory(cellData -> cellData.getValue().subcategoriaProperty());
     }
 
-    @FXML
-    public void agredarDatosTablaCategoria(){
-
+    //FlujoEfectivo
+    
+    public void peticionGetFlujoEfectivo(){
+        Conexion conexion = new Conexion();
+        efectivoObservableList = conexion.getFlujoEfectivo();
+        tablaEfectivo.setItems(efectivoObservableList);
+        colDesEfectivo.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
+        colCatEfectivo.setCellValueFactory(cellData -> cellData.getValue().idCategoriaProperty());
     }
 }
 
