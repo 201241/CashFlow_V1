@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class Conexion {
 
-    private String url= "http://167.172.146.90:3005/categoria/getCategorias";
+    private String url= "http://localhost:3005/categoria/getCategorias";
     private StringBuilder response = new StringBuilder();
 
     public Conexion (){
@@ -71,9 +71,9 @@ public class Conexion {
             ra.close();
             JSONArray jsonResponse = new JSONArray(response.toString());
             for (int i = 0; i < jsonResponse.length() ; i++) {
-                JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
-                flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"), objectEfectivo.getString("numeroSemana"));
-                listaFlujoEfectivo.add(efectivo);
+              //  JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
+              //  flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"), objectEfectivo.getString("numeroSemana"));
+             //   listaFlujoEfectivo.add(efectivo);
             }
             return listaFlujoEfectivo;
         }
@@ -111,5 +111,22 @@ public class Conexion {
             System.out.println(exception);
         }
         return listaIndicadorDinero;
+    }
+
+    public void createFlujoEfectivo(String tipoFlujo,String fecha, String idCategoria, String descripcion, Double cantidad, String numeroSemana){
+        JSONObject jsonflujo = new JSONObject();
+       try {
+           URL nameUrl= new URL(url);
+           HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+           connection.setRequestMethod("POST");
+
+       }catch (Exception e){
+
+       }
+    }
+
+
+    public void crearCategoria(String clasificacion, String categoria, String subCategoria){
+        JSONObject jsonflujo = new JSONObject();
     }
 }

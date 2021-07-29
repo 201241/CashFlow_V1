@@ -6,24 +6,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
 import main.model.Categoria;
 import main.model.Conexion;
 import main.model.flujoEfectivo;
 import main.model.indicadorDinero;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class menuController implements Initializable
@@ -127,7 +122,7 @@ public class menuController implements Initializable
     private TextField desFlujoD;
 
     @FXML
-    private TextField catFlujoD;
+    private ComboBox<Categoria> comboCategoria;
 
     @FXML
     private TextField cantidadFlujoDinero;
@@ -228,13 +223,34 @@ public class menuController implements Initializable
 
     @FXML
     void iniciarCategoria(ActionEvent event) {
+        peticiongetCategorias();
         menuCategoria.setVisible(true);
     }
 
     @FXML
     void iniciarFlujo(ActionEvent event) {
+        uploadCombo();
+       // peticionGetFlujoEfectivo();
         menuEfectivo.setVisible(true);
     }
+
+    public void uploadCombo(){
+        ObservableList<Categoria> items;
+        Conexion conexion = new Conexion();
+        items = conexion.getCAtegoria();
+        comboCategoria.setItems(items);
+        comboCategoria.setConverter(new StringConverter<Categoria>() {
+            @Override
+            public String toString(Categoria categoria) {
+                return categoria.getCategoria();
+            }
+
+            @Override
+            public Categoria fromString(String s) {
+                return null;
+            }
+        });
+    };
 
     @FXML
     void iniciarIndicador(ActionEvent event) {
@@ -260,8 +276,24 @@ public class menuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("entro squi");
-        peticiongetCategorias();
+
+    }
+
+
+    public void guardarFlujoEfectivo(){
+        Date fecha = new Date();
+        String strDateFormat = "dd/MM/yyyy";
+        SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
+        String fechanow = objfecha.format(fecha);
+    if(btnEntradaDinero.isSelected() == true){
+
+    }else if (btnSalidaDinero.isSelected() == true){
+
+    }
+
+    }
+    public void guardarCategoria(){
+
     }
 
 
@@ -283,8 +315,5 @@ public class menuController implements Initializable
         tablaEfectivo.setItems(efectivoObservableList);
         colFecha.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().fechaProperty());
         colDesEfectivo.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
-        colCatEfectivo.setCellValueFactory(cellData -> cellData.getValue().idCategoriaProperty());
-
-
     }
 }

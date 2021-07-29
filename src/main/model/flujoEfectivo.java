@@ -10,7 +10,7 @@ public class flujoEfectivo {
     private final StringProperty fecha = new SimpleStringProperty();
     private final StringProperty tipoFlujo = new SimpleStringProperty();
     private final StringProperty descripcion = new SimpleStringProperty();
-    private final StringProperty idCategoria = new SimpleStringProperty();
+    private  Categoria categoria;
     private final DoubleProperty cantidad = new SimpleDoubleProperty();
     private final StringProperty idFlujoEfectivo = new SimpleStringProperty();
     private final StringProperty numeroSemana = new SimpleStringProperty();
@@ -18,15 +18,22 @@ public class flujoEfectivo {
     //numeroSemana
 
 
-    flujoEfectivo(String fecha, String tipoFlujo, String descripcion, Double cantidad,String idCategoria, String idFlujoEfectivo, String numeroSemana){
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    flujoEfectivo(String fecha, String tipoFlujo, String descripcion, Double cantidad, Categoria categoria, String idFlujoEfectivo, String numeroSemana){
         this.fecha.set(fecha);
         this.tipoFlujo.set(tipoFlujo);
         this.descripcion.set(descripcion);
         this.cantidad.set(cantidad);
-        this.idCategoria.set(idCategoria);
+        this.categoria = categoria;
         this.idFlujoEfectivo.set(idFlujoEfectivo);
         this.numeroSemana.set(numeroSemana);
-
     }
 
     public String getIdFlujoEfectivo() {
@@ -77,17 +84,6 @@ public class flujoEfectivo {
         this.descripcion.set(descripcion);
     }
 
-    public String getIdCategoria() {
-        return idCategoria.get();
-    }
-
-    public StringProperty idCategoriaProperty() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria.set(idCategoria);
-    }
 
     public double getCantidad() {
         return cantidad.get();
