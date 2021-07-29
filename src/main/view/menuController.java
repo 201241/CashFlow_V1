@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import main.model.Categoria;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -47,7 +48,7 @@ public class menuController implements Initializable
     private Label lblfinanzas1;
 
     @FXML
-    private TableView<?> listaCategoria;
+    private TableView<Categoria> listaCategoria;
 
     @FXML
     private TableColumn<?, ?> colClasificacion;
