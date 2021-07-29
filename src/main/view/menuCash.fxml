@@ -56,7 +56,7 @@
             <Image url="@pixlr-bg-result%20(5).png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="menuCategoria" prefHeight="550.0" prefWidth="730.0" style="-fx-background-color: #dae8ec;" visible="false">
+      <AnchorPane fx:id="menuCategoria" prefHeight="550.0" prefWidth="730.0" style="-fx-background-color: #dae8ec;">
          <children>
             <AnchorPane prefHeight="47.0" prefWidth="724.0" style="-fx-background-color: #929fc9; -fx-background-radius: 0;" visible="false">
                <children>
@@ -67,7 +67,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TableView fx:id="listaCategoria" layoutX="17.0" layoutY="133.0" prefHeight="290.0" prefWidth="359.0">
+            <TableView fx:id="listaCategoria" layoutX="17.0" layoutY="133.0" onSort="#agredarDatosTablaCategoria" prefHeight="290.0" prefWidth="359.0">
               <columns>
                 <TableColumn fx:id="colClasificacion" prefWidth="75.0" text="Clasificación" />
                 <TableColumn fx:id="colCategoria" prefWidth="75.0" text="Categoria" />

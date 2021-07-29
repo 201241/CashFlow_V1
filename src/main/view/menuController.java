@@ -190,6 +190,8 @@ public class menuController implements Initializable
     @FXML
     private Button guardarBancos;
 
+
+//Control Vistas//
     @FXML
     void cerrarCategoria(ActionEvent event) {
         menuCategoria.setVisible(false);
@@ -244,6 +246,13 @@ public class menuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    //Categorias//
+
+    @FXML
+    public void agredarDatosTablaCategoria(){
 
     }
 }
