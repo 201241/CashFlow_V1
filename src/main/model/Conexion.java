@@ -72,7 +72,7 @@ public class Conexion {
             JSONArray jsonResponse = new JSONArray(response.toString());
             for (int i = 0; i < jsonResponse.length() ; i++) {
                 JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
-                flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"));
+                flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"), objectEfectivo.getString("numeroSemana"));
                 listaFlujoEfectivo.add(efectivo);
             }
             return listaFlujoEfectivo;

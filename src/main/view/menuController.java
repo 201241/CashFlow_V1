@@ -102,7 +102,7 @@ public class menuController implements Initializable
     private TableView<flujoEfectivo> tablaEfectivo;
 
     @FXML
-    private TableColumn<?,?> colFecha;
+    private TableColumn<flujoEfectivo, String> colFecha;
 
     @FXML
     private TableColumn<flujoEfectivo, String> colDesEfectivo;
@@ -131,6 +131,9 @@ public class menuController implements Initializable
 
     @FXML
     private TextField cantidadFlujoDinero;
+
+    @FXML
+    private TextField NumSemana;
 
 
 
@@ -190,6 +193,7 @@ public class menuController implements Initializable
 
     @FXML
     private TextField descripcionBanco;
+
 
 
 
@@ -277,9 +281,10 @@ public class menuController implements Initializable
         Conexion conexion = new Conexion();
         efectivoObservableList = conexion.getFlujoEfectivo();
         tablaEfectivo.setItems(efectivoObservableList);
+        colFecha.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().fechaProperty());
         colDesEfectivo.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
         colCatEfectivo.setCellValueFactory(cellData -> cellData.getValue().idCategoriaProperty());
+
+
     }
 }
-
-
