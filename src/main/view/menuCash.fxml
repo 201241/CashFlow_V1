@@ -138,17 +138,12 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Text fill="#4b4d49" layoutX="49.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción:">
+            <Text fill="#4b4d49" layoutX="43.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción:">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="15.0" />
                </font>
             </Text>
-            <Text fill="#4b4d49" layoutX="49.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub-Categoria:">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold" size="15.0" />
-               </font>
-            </Text>
-            <Text fill="#4b4d49" layoutX="49.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria:">
+            <Text fill="#4b4d49" layoutX="44.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria:">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="15.0" />
                </font>
@@ -158,9 +153,8 @@
                   <Font name="DejaVu Sans Mono Bold" size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="SubCFlujoD" layoutX="228.0" layoutY="378.0" />
             <TextField fx:id="desFlujoD" layoutX="228.0" layoutY="303.0" />
-            <TextField fx:id="catFlujoD" layoutX="228.0" layoutY="342.0" />
+            <TextField fx:id="catFlujoD" layoutX="228.0" layoutY="363.0" />
             <TextField fx:id="cantidadFlujoDinero" layoutX="228.0" layoutY="415.0" />
             <Button fx:id="guardarFlujoEfectivo" layoutX="517.0" layoutY="490.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="193.0" style="-fx-background-radius: 10; -fx-background-color: springgreen;" text="Guardar" textFill="WHITE">
                <font>
