@@ -49,6 +49,8 @@ public class menuController implements Initializable
     private Label lblfinanzas1;
 
     @FXML
+    private ComboBox<String> cbxClasificacion;
+    @FXML
     private TableView<Categoria> listaCategoria;
 
     @FXML
@@ -189,7 +191,8 @@ public class menuController implements Initializable
     @FXML
     private TextField descripcionBanco;
 
-
+    //variables
+    String selecioncomboClasificacion;
 
 
     @FXML
@@ -223,10 +226,17 @@ public class menuController implements Initializable
 
     @FXML
     void iniciarCategoria(ActionEvent event) {
-        peticiongetCategorias();
+       // peticiongetCategorias();
+        uploadComboClasificacion();
         menuCategoria.setVisible(true);
     }
-
+    public void uploadComboClasificacion(){
+        ObservableList<String> items = FXCollections.observableArrayList("GAO","Ingreso","Costo-Venta");
+        cbxClasificacion.setItems(items);
+        cbxClasificacion.valueProperty().addListener((observableValue, s, t1) -> {
+           selecioncomboClasificacion = t1;
+        });
+    }
     @FXML
     void iniciarFlujo(ActionEvent event) {
         uploadCombo();
@@ -292,7 +302,12 @@ public class menuController implements Initializable
     }
 
     }
+
     public void guardarCategoria(){
+       if(selecioncomboClasificacion.length() > 0 && catSeleccionada.getText().length() > 0 && subCatSeleccionada.getText().length()>0){
+           Conexion conexion = new Conexion();
+           conexion.crearCategoria(selecioncomboClasificacion, catSeleccionada.getText(),subCatSeleccionada.getText());
+       }
     }
 
 

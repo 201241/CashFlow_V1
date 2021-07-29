@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -128,5 +129,28 @@ public class Conexion {
 
     public void crearCategoria(String clasificacion, String categoria, String subCategoria){
         JSONObject jsonflujo = new JSONObject();
+        jsonflujo.put("clasificacion",clasificacion);
+        jsonflujo.put("categoria",categoria);
+        jsonflujo.put("subCategoria",subCategoria);
+
+        byte[] body = jsonflujo.toString().getBytes(StandardCharsets.UTF_8);
+        try{
+            URL nameUrl= new URL(url);
+            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(body);
+
+            BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+            StringBuilder aux = new StringBuilder();
+            String linea;
+            while ((linea = response.readLine()) != null){
+                aux.append(linea);
+                System.out.println(linea);
+            }
+        }catch (Exception e){
+
+        }
+
     }
 }
