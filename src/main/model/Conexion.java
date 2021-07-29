@@ -1,5 +1,7 @@
 package main.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.ScatterChart;
 
 import java.io.BufferedReader;
@@ -13,18 +15,19 @@ import org.json.JSONObject;
 
 public class Conexion {
 
-    private String url= "http://167.172.146.90:3005";
-    private String path= "/categoria/getCategorias";
+    private String url= "http://167.172.146.90:3005/categoria/getCategorias";
     private StringBuilder response = new StringBuilder();
 
+    public Conexion (){
 
+    }
 
-    public ArrayList<Categoria> getCAtegoria()
+    public ObservableList<Categoria> getCAtegoria()
     {
-        ArrayList<Categoria> listaCategoria = new ArrayList<Categoria>();
-        String union=url+path;
+        System.out.println("entro aqwui");
+        ObservableList<Categoria> listaCategoria = FXCollections.observableArrayList();
         try{
-            URL nameUrl= new URL(union);
+            URL nameUrl= new URL(url);
             HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -38,13 +41,14 @@ public class Conexion {
             for (int i = 0; i < jsonResponse.length() ; i++) {
                 JSONObject objectCategoria = jsonResponse.getJSONObject(i);
                 Categoria categoria = new Categoria(objectCategoria.getString("idCategoria"), objectCategoria.getString("clasificacion"), objectCategoria.getString("categoria"), objectCategoria.getString("subCategoria") );
-                listaCategoria.add(categoria);
+               listaCategoria.add(categoria);
+                System.out.println(objectCategoria.getString("idCategoria"));
             }
             return listaCategoria;
         }
 
         catch(Exception exception){
-
+            System.out.println(exception);
         }
         return listaCategoria;
     }

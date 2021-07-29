@@ -1,6 +1,8 @@
 package main.view;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,8 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import main.model.Categoria;
+import main.model.Conexion;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class menuController implements Initializable
@@ -51,13 +55,13 @@ public class menuController implements Initializable
     private TableView<Categoria> listaCategoria;
 
     @FXML
-    private TableColumn<?, ?> colClasificacion;
+    private TableColumn<Categoria, String> colClasificacion;
 
     @FXML
-    private TableColumn<?, ?> colCategoria;
+    private TableColumn<Categoria, String> colCategoria;
 
     @FXML
-    private TableColumn<?, ?> colSubCat;
+    private TableColumn<Categoria, String> colSubCat;
 
     @FXML
     private Label lblfinanzas11;
@@ -190,6 +194,8 @@ public class menuController implements Initializable
     @FXML
     private Button guardarBancos;
 
+    ObservableList<Categoria> categoriaObservableList = FXCollections.observableArrayList();
+
 
 //Control Vistas//
     @FXML
@@ -246,10 +252,20 @@ public class menuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("entro squi");
+        peticiongetCategorias();
     }
 
+
     //Categorias//
+    public void peticiongetCategorias(){
+        Conexion conexion = new Conexion();
+        categoriaObservableList = conexion.getCAtegoria();
+        listaCategoria.setItems(categoriaObservableList);
+        colClasificacion.setCellValueFactory(cellData -> cellData.getValue().clasificacionProperty());
+        colCategoria.setCellValueFactory(cellData -> cellData.getValue().categoriaProperty());
+        colSubCat.setCellValueFactory(cellData -> cellData.getValue().subcategoriaProperty());
+    }
 
     @FXML
     public void agredarDatosTablaCategoria(){
