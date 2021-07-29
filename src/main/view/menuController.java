@@ -308,7 +308,7 @@ public class menuController implements Initializable
     }
 
     //FlujoEfectivo
-    
+
     public void peticionGetFlujoEfectivo(){
         Conexion conexion = new Conexion();
         efectivoObservableList = conexion.getFlujoEfectivo();
