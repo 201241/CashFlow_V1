@@ -26,7 +26,7 @@ public class Conexion {
 
     public ObservableList<Categoria> getCAtegoria() {
 
-         String url= "http://localhost:3005/categoria/getCategorias";
+         String url= "http://167.172.146.90:3005/categoria/getCategorias";
         ObservableList<Categoria> listaCategoria = FXCollections.observableArrayList();
         try{
             URL nameUrl= new URL(url);
@@ -57,7 +57,7 @@ public class Conexion {
 
 
     public ObservableList<flujoEfectivo> getFlujoEfectivo(){
-         String urlgetflujo= "http://localhost:3005/flujoEfectivo/getAllFlujoEfectivo";
+         String urlgetflujo= "http://167.172.146.90:3005/flujoEfectivo/getAllFlujoEfectivo";
         ObservableList<flujoEfectivo> listaFlujoEfectivo = FXCollections.observableArrayList();
 
         try{
@@ -97,7 +97,7 @@ public class Conexion {
     }
 
     public ObservableList<indicadorDinero> getIndicador() {
-        String urlindicador = "http://localhost:3005/indicadoresDinero/getIndicadores";
+        String urlindicador = "http://167.172.146.90:3005/indicadoresDinero/getIndicadores";
         System.out.println("datos indicadores de dinero");
         ObservableList<indicadorDinero> listaIndicadorDinero = FXCollections.observableArrayList();
         try{
@@ -126,7 +126,7 @@ public class Conexion {
     }
 
     public void createFlujoEfectivo(String tipoFlujo,String fecha, String idCategoria, String descripcion, Double cantidad, String numeroSemana){
-        String url= "http://localhost:3005/flujoEfectivo/addFlujoEfectivo";
+        String url= "http://167.172.146.90:3005/flujoEfectivo/addFlujoEfectivo";
         JSONObject jsonflujo = new JSONObject();
         jsonflujo.put("tipoFlujo",tipoFlujo);
         jsonflujo.put("fecha",fecha);
@@ -157,7 +157,7 @@ public class Conexion {
     }
 
     public void crearInidcador(String tipoIndicador, String numeroSemana, String razonSocial, Double monto,String fecha){
-        String urlindicador = "http://localhost:3005/indicadoresDinero/addIndicadores";
+        String urlindicador = "http://167.172.146.90:3005/indicadoresDinero/addIndicadores";
 
         JSONObject jsonbody = new JSONObject();
         jsonbody.put("tipoIndicador", tipoIndicador);
@@ -187,7 +187,7 @@ public class Conexion {
         }
     }
     public void crearCategoria(String clasificacion, String categoria, String subCategoria){
-         String url= "http://localhost:3005/categoria/categoriaAdd";
+         String url= "http://167.172.146.90:3005/categoria/categoriaAdd";
         JSONObject jsonflujo = new JSONObject();
         jsonflujo.put("clasificacion",clasificacion);
         jsonflujo.put("categoria",categoria);
