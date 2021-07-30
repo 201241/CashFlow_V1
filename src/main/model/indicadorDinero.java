@@ -12,14 +12,24 @@ public class indicadorDinero {
     private final StringProperty razonSocial = new SimpleStringProperty();
     private final StringProperty idIndicador = new SimpleStringProperty();
     private final DoubleProperty monto = new SimpleDoubleProperty();
+    private String fecha;
 
-    indicadorDinero(String tipoCuenta, String noSemana, String razonSocial, Double monto, String idIndicador)
+    indicadorDinero(String tipoCuenta, String noSemana, String razonSocial, Double monto, String idIndicador,String fecha)
     {
         this.tipoCuenta.set(tipoCuenta);
         this.noSemana.set(noSemana);
         this.razonSocial.set(razonSocial);
         this.monto.set(monto);
         this.idIndicador.set(idIndicador);
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getTipoCuenta() {

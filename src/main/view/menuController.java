@@ -105,7 +105,7 @@ public class menuController implements Initializable
     private TableColumn<flujoEfectivo, String> colDesEfectivo;
 
     @FXML
-    private TableColumn<flujoEfectivo, String> colCatEfectivo;
+        private TableColumn<flujoEfectivo, String> colCatEfectivo;
 
     @FXML
     private TableColumn<flujoEfectivo, String> colSubEfectivo;
@@ -193,6 +193,7 @@ public class menuController implements Initializable
 
     //variables
     String selecioncomboClasificacion;
+    String selecioncomboCategoria;
 
 
     @FXML
@@ -226,10 +227,22 @@ public class menuController implements Initializable
 
     @FXML
     void iniciarCategoria(ActionEvent event) {
-       // peticiongetCategorias();
+        peticiongetCategorias();
         uploadComboClasificacion();
         menuCategoria.setVisible(true);
     }
+
+    public void peticiongetCategorias(){
+        Conexion conexion = new Conexion();
+        categoriaObservableList = conexion.getCAtegoria();
+        listaCategoria.setItems(categoriaObservableList);
+        colClasificacion.setCellValueFactory(cellData -> cellData.getValue().clasificacionProperty());
+        colCategoria.setCellValueFactory(cellData -> cellData.getValue().categoriaProperty());
+        colSubCat.setCellValueFactory(cellData -> cellData.getValue().subcategoriaProperty());
+    }
+
+
+
     public void uploadComboClasificacion(){
         ObservableList<String> items = FXCollections.observableArrayList("GAO","Ingreso","Costo-Venta");
         cbxClasificacion.setItems(items);
@@ -237,14 +250,28 @@ public class menuController implements Initializable
            selecioncomboClasificacion = t1;
         });
     }
+
+    //flujo de efectivo
     @FXML
     void iniciarFlujo(ActionEvent event) {
-        uploadCombo();
-       // peticionGetFlujoEfectivo();
+      uploadComboCategoria();
+      peticionGetFlujoEfectivo();
         menuEfectivo.setVisible(true);
     }
 
-    public void uploadCombo(){
+    public void peticionGetFlujoEfectivo(){
+        Conexion conexion = new Conexion();
+        efectivoObservableList = conexion.getFlujoEfectivo();
+        tablaEfectivo.setItems(efectivoObservableList);
+        colFecha.setCellValueFactory(celldata -> celldata.getValue().fechaProperty());
+        colDesEfectivo.setCellValueFactory(celldata -> celldata.getValue().descripcionProperty());
+        colCatEfectivo.setCellValueFactory(celldata -> celldata.getValue().getCategoria().categoriaProperty());
+        colSubEfectivo.setCellValueFactory(celldata -> celldata.getValue().getCategoria().subcategoriaProperty());
+    }
+
+
+    //combo
+    public void uploadComboCategoria(){
         ObservableList<Categoria> items;
         Conexion conexion = new Conexion();
         items = conexion.getCAtegoria();
@@ -260,11 +287,73 @@ public class menuController implements Initializable
                 return null;
             }
         });
+
+        comboCategoria.valueProperty().addListener((observableValue, categoria1, t1) -> {
+            selecioncomboCategoria = t1.getId();
+        });
     };
+
+
+    public void guardarFlujoEfectivo(){
+        System.out.println("entro aqui");
+        if(desFlujoD.getText().length() > 0 && selecioncomboCategoria.length() > 0 && cantidadFlujoDinero.getText().length()>0 && NumSemana.getText().length()>0){
+            System.out.println("ala aqui");
+            Date fecha = new Date();
+            String strDateFormat = "dd/MM/yyyy";
+            SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
+            String fechanow = objfecha.format(fecha);
+            if(btnEntradaDinero.isSelected() == true){
+                System.out.println("botones");
+                peticionCrearFlujoEfectivo("entrada",fechanow);
+            }else if (btnSalidaDinero.isSelected() == true){
+                peticionCrearFlujoEfectivo("salida",fechanow);
+            }
+        }else{
+            System.out.println("no se completo los campos");
+        }
+
+    }
+   public void peticionCrearFlujoEfectivo(String tipo, String fecha){
+       Conexion conexion = new Conexion();
+       conexion.createFlujoEfectivo(tipo,fecha,selecioncomboCategoria,desFlujoD.getText(),Double.parseDouble(cantidadFlujoDinero.getText()),NumSemana.getText());
+       peticionGetFlujoEfectivo();
+    }
+
+
 
     @FXML
     void iniciarIndicador(ActionEvent event) {
         vistaUnoIndicadores.setVisible(true);
+    }
+    public void peticionPostIndicadorCuentas(String check, String nSemana, String razonsocial, Double monto){
+        if(check.length()> 0&& nSemana.length()>0 && razonsocial.length()>0 && monto.toString().length()>0){
+            Conexion conexion = new Conexion();
+            Date fechaw = new Date();
+            String strDateFormat = "dd/MM/yyyy";
+            SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
+            String fechanoww = objfecha.format(fechaw);
+            conexion.crearInidcador(check,nSemana,razonsocial,monto,fechanoww);
+        }
+
+    }
+
+    public void guardarCuenta(){
+        if(cuentasPagar.isSelected() == true ){
+            peticionPostIndicadorCuentas("pagar", txtsemanaCuentas.getText(),razonSocialCuenta.getText(),Double.valueOf(montoCuenta.getText()));
+        }else if(cuentaCobrar.isSelected() == true){
+            peticionPostIndicadorCuentas("cobrar", txtsemanaCuentas.getText(),razonSocialCuenta.getText(),Double.valueOf(montoCuenta.getText()));
+        }
+    }
+
+    public void guardarBanco(){
+        if (txtsemanaBancos.getText().length()>0 && descripcionBanco.getText().length()>0 && montoBanco.getText().length()>0){
+            Conexion conexion = new Conexion();
+            Date fecha = new Date();
+            String strDateFormat = "dd/MM/yyyy";
+            SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
+            String fechanow = objfecha.format(fecha);
+            conexion.crearInidcador("banco", txtsemanaBancos.getText(),descripcionBanco.getText(),Double.valueOf(montoBanco.getText()),fechanow);
+        }
     }
 
     @FXML
@@ -289,56 +378,17 @@ public class menuController implements Initializable
 
     }
 
-
-    public void guardarFlujoEfectivo(){
-        Date fecha = new Date();
-        String strDateFormat = "dd/MM/yyyy";
-        SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
-        String fechanow = objfecha.format(fecha);
-    if(btnEntradaDinero.isSelected() == true){
-
-    }else if (btnSalidaDinero.isSelected() == true){
-
-    }
-
-    }
-
     public void guardarCategoria(){
        if(selecioncomboClasificacion.length() > 0 && catSeleccionada.getText().length() > 0 && subCatSeleccionada.getText().length()>0){
+           System.out.println("creo la categoria");
            Conexion conexion = new Conexion();
            conexion.crearCategoria(selecioncomboClasificacion, catSeleccionada.getText(),subCatSeleccionada.getText());
        }
     }
 
 
-    //Categorias//
-    public void peticiongetCategorias(){
-        Conexion conexion = new Conexion();
-        categoriaObservableList = conexion.getCAtegoria();
-        listaCategoria.setItems(categoriaObservableList);
-        colClasificacion.setCellValueFactory(cellData -> cellData.getValue().clasificacionProperty());
-        colCategoria.setCellValueFactory(cellData -> cellData.getValue().categoriaProperty());
-        colSubCat.setCellValueFactory(cellData -> cellData.getValue().subcategoriaProperty());
-    }
-
-    //FlujoEfectivo
-
-    public void peticionGetFlujoEfectivo(){
-        Conexion conexion = new Conexion();
-        efectivoObservableList = conexion.getFlujoEfectivo();
-        tablaEfectivo.setItems(efectivoObservableList);
-        colFecha.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().fechaProperty());
-        colDesEfectivo.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
-    }
 
 
-    public void guardarCuenta()
-    {
 
-    }
 
-    public void guardarBanco()
-    {
-
-    }
 }

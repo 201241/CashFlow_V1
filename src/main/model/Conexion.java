@@ -6,6 +6,7 @@ import javafx.scene.chart.ScatterChart;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,16 +17,16 @@ import org.json.JSONObject;
 
 public class Conexion {
 
-    private String url= "http://localhost:3005/categoria/getCategorias";
+
     private StringBuilder response = new StringBuilder();
 
     public Conexion (){
 
     }
 
-    public ObservableList<Categoria> getCAtegoria()
-    {
-        System.out.println("entro aqwui");
+    public ObservableList<Categoria> getCAtegoria() {
+
+         String url= "http://localhost:3005/categoria/getCategorias";
         ObservableList<Categoria> listaCategoria = FXCollections.observableArrayList();
         try{
             URL nameUrl= new URL(url);
@@ -54,27 +55,38 @@ public class Conexion {
         return listaCategoria;
     }
 
-    public ObservableList<flujoEfectivo> getFlujoEfectivo(){
 
-        System.out.println("datos flujo de efectivo");
+    public ObservableList<flujoEfectivo> getFlujoEfectivo(){
+         String urlgetflujo= "http://localhost:3005/flujoEfectivo/getAllFlujoEfectivo";
         ObservableList<flujoEfectivo> listaFlujoEfectivo = FXCollections.observableArrayList();
 
         try{
-            URL nameUrl= new URL(url);
-            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            URL nameUrl= new URL(urlgetflujo);
+            HttpURLConnection connection = (HttpURLConnection) nameUrl.openConnection();
             connection.setRequestMethod("GET");
-            BufferedReader ra = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String datos;
-            while ((datos = ra.readLine())!=null)
-            {
+            while ((datos = rd.readLine()) !=null ){
                 response.append(datos);
             }
-            ra.close();
+            rd.close();
             JSONArray jsonResponse = new JSONArray(response.toString());
             for (int i = 0; i < jsonResponse.length() ; i++) {
-              //  JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
-              //  flujoEfectivo efectivo = new flujoEfectivo(objectEfectivo.getString("fecha"),objectEfectivo.getString("tipoFlujo"),objectEfectivo.getString("descripcion"),objectEfectivo.getDouble("cantidad"),objectEfectivo.getString("idCategoria"), objectEfectivo.getString("idFlujoEfectivo"), objectEfectivo.getString("numeroSemana"));
-             //   listaFlujoEfectivo.add(efectivo);
+                JSONObject objectEfectivo = jsonResponse.getJSONObject(i);
+                System.out.println(objectEfectivo.getJSONObject("categorium").getString("clasificacion"));
+                String idcategoria = objectEfectivo.getJSONObject("categorium").getString("idCategoria");
+                String clasificacion = objectEfectivo.getJSONObject("categorium").getString("clasificacion");
+                String categoria = objectEfectivo.getJSONObject("categorium").getString("categoria");
+                String subCategoria = objectEfectivo.getJSONObject("categorium").getString("subCategoria");
+               Categoria categoriaaux = new Categoria(idcategoria,clasificacion,categoria,subCategoria);
+               String idFlujoEfectivo = objectEfectivo.getString("idFlujoEfectivo");
+               String tipoFlujo = objectEfectivo.getString("tipoFlujo");
+               String fecha = objectEfectivo.getString("fecha");
+               String descripcion =objectEfectivo.getString("descripcion");
+               Double cantidad = objectEfectivo.getDouble("cantidad");
+               String numeroSemana = objectEfectivo.getString("numeroSemana");
+                flujoEfectivo efectivo = new flujoEfectivo(fecha,tipoFlujo,descripcion,Double.valueOf(cantidad),categoriaaux,idFlujoEfectivo,numeroSemana);
+                listaFlujoEfectivo.add(efectivo);
             }
             return listaFlujoEfectivo;
         }
@@ -84,26 +96,25 @@ public class Conexion {
         return listaFlujoEfectivo;
     }
 
-    public ObservableList<indicadorDinero> getIndicador()
-    {
+    public ObservableList<indicadorDinero> getIndicador() {
+        String urlindicador = "http://localhost:3005/indicadoresDinero/getIndicadores";
         System.out.println("datos indicadores de dinero");
         ObservableList<indicadorDinero> listaIndicadorDinero = FXCollections.observableArrayList();
-
         try{
-            URL nameUrl= new URL(url);
+            URL nameUrl= new URL(urlindicador);
             HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
             connection.setRequestMethod("GET");
-            BufferedReader ri = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String datosIndicador;
-            while ((datosIndicador = ri.readLine())!=null)
+            while ((datosIndicador = rd.readLine())!=null)
             {
                 response.append(datosIndicador);
             }
-            ri.close();
+            rd.close();
             JSONArray jsonResponse = new JSONArray(response.toString());
             for (int i = 0; i < jsonResponse.length() ; i++) {
                 JSONObject objectIndicador = jsonResponse.getJSONObject(i);
-                indicadorDinero dinero = new indicadorDinero(objectIndicador.getString("tipoIndicador"),objectIndicador.getString("numeroSemana"), objectIndicador.getString("razonSocial"), objectIndicador.getDouble("monto"), objectIndicador.getString("idIndicadoresDinero"));
+                indicadorDinero dinero = new indicadorDinero(objectIndicador.getString("tipoIndicador"),objectIndicador.getString("numeroSemana"), objectIndicador.getString("razonSocial"), objectIndicador.getDouble("monto"), objectIndicador.getString("idIndicadoresDinero"), objectIndicador.getString("fecha"));
                 listaIndicadorDinero.add(dinero);
             }
             return listaIndicadorDinero;
@@ -115,32 +126,87 @@ public class Conexion {
     }
 
     public void createFlujoEfectivo(String tipoFlujo,String fecha, String idCategoria, String descripcion, Double cantidad, String numeroSemana){
+        String url= "http://localhost:3005/flujoEfectivo/addFlujoEfectivo";
         JSONObject jsonflujo = new JSONObject();
+        jsonflujo.put("tipoFlujo",tipoFlujo);
+        jsonflujo.put("fecha",fecha);
+        jsonflujo.put("idCategoria", idCategoria);
+        jsonflujo.put("descripcion",descripcion);
+        jsonflujo.put("cantidad", Double.valueOf(cantidad));
+        jsonflujo.put("numeroSemana", numeroSemana);
        try {
            URL nameUrl= new URL(url);
+           byte[] body = jsonflujo.toString().getBytes("UTF-8");
            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
            connection.setRequestMethod("POST");
-
+           connection.setRequestProperty("Accept", "application/json");
+           connection.setRequestProperty("Content-Type", "application/json");
+           connection.setDoOutput(true);
+           connection.getOutputStream().write(body);
+           BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+           StringBuilder aux = new StringBuilder();
+           String linea;
+           while ((linea = response.readLine()) != null){
+               aux.append(linea);
+               System.out.println(linea);
+           }
+           response.close();
        }catch (Exception e){
 
        }
     }
 
+    public void crearInidcador(String tipoIndicador, String numeroSemana, String razonSocial, Double monto,String fecha){
+        String urlindicador = "http://localhost:3005/indicadoresDinero/addIndicadores";
 
+        JSONObject jsonbody = new JSONObject();
+        jsonbody.put("tipoIndicador", tipoIndicador);
+        jsonbody.put("numeroSemana",numeroSemana);
+        jsonbody.put("razonSocial",razonSocial);
+        jsonbody.put("monto", Double.valueOf(monto));
+        jsonbody.put("fecha", fecha);
+        try {
+            URL nameUrl= new URL(urlindicador);
+            byte[] body = jsonbody.toString().getBytes("UTF-8");
+            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(body);
+            BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+            StringBuilder aux = new StringBuilder();
+            String linea;
+            while ((linea = response.readLine()) != null){
+                aux.append(linea);
+                System.out.println(linea);
+            }
+            response.close();
+        }catch (Exception e){
+
+        }
+    }
     public void crearCategoria(String clasificacion, String categoria, String subCategoria){
+         String url= "http://localhost:3005/categoria/categoriaAdd";
         JSONObject jsonflujo = new JSONObject();
         jsonflujo.put("clasificacion",clasificacion);
         jsonflujo.put("categoria",categoria);
         jsonflujo.put("subCategoria",subCategoria);
-
-        byte[] body = jsonflujo.toString().getBytes(StandardCharsets.UTF_8);
+        byte[] body = new byte[0];
+        try {
+            body = jsonflujo.toString().getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         try{
             URL nameUrl= new URL(url);
             HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
             connection.setRequestMethod("POST");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
             connection.setDoOutput(true);
             connection.getOutputStream().write(body);
-
             BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
             StringBuilder aux = new StringBuilder();
             String linea;
@@ -149,7 +215,7 @@ public class Conexion {
                 System.out.println(linea);
             }
         }catch (Exception e){
-
+            System.out.println(e);
         }
 
     }
