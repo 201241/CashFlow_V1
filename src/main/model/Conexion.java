@@ -2,15 +2,12 @@ package main.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.ScatterChart;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -128,12 +125,30 @@ public class Conexion {
     public void createFlujoEfectivo(String tipoFlujo,String fecha, String idCategoria, String descripcion, Double cantidad, String numeroSemana){
         String url= "http://167.172.146.90:3005/flujoEfectivo/addFlujoEfectivo";
         JSONObject jsonflujo = new JSONObject();
+        String[] arreglofecha = fecha.split("/");
+         String mes = "enero";
+        switch (arreglofecha[1]){
+            case "01" : {mes = "enero";}
+            break;
+            case "02" : {mes = "febrero";}break;
+            case "03" : {mes = "marzo";}break;
+            case "04" : {mes = "abril";}break;
+            case "05" : {mes = "mayo";}break;
+            case "06" : {mes = "junio";}break;
+            case "07" : {mes = "julio";}break;
+            case "08" : {mes = "agosto";}break;
+            case "09" : {mes = "septiembre";}break;
+            case "10" : {mes = "octubre";}break;
+            case "11" : {mes = "noviembre";}break;
+            case "12" : {mes = "diciembre";}break;
+        }
         jsonflujo.put("tipoFlujo",tipoFlujo);
-        jsonflujo.put("fecha",fecha);
-        jsonflujo.put("idCategoria", idCategoria);
+       jsonflujo.put("fecha",fecha);
+       jsonflujo.put("idCategoria", idCategoria);
         jsonflujo.put("descripcion",descripcion);
         jsonflujo.put("cantidad", Double.valueOf(cantidad));
         jsonflujo.put("numeroSemana", numeroSemana);
+        jsonflujo.put("mes", mes);
        try {
            URL nameUrl= new URL(url);
            byte[] body = jsonflujo.toString().getBytes("UTF-8");
@@ -158,13 +173,30 @@ public class Conexion {
 
     public void crearInidcador(String tipoIndicador, String numeroSemana, String razonSocial, Double monto,String fecha){
         String urlindicador = "http://167.172.146.90:3005/indicadoresDinero/addIndicadores";
-
+        String[] arreglofecha = fecha.split("/");
+        String mes = "enero";
+        switch (arreglofecha[1]){
+            case "01" : {mes = "enero";}
+            break;
+            case "02" : {mes = "febrero";}break;
+            case "03" : {mes = "marzo";}break;
+            case "04" : {mes = "abril";}break;
+            case "05" : {mes = "mayo";}break;
+            case "06" : {mes = "junio";}break;
+            case "07" : {mes = "julio";}break;
+            case "08" : {mes = "agosto";}break;
+            case "09" : {mes = "septiembre";}break;
+            case "10" : {mes = "octubre";}break;
+            case "11" : {mes = "noviembre";}break;
+            case "12" : {mes = "diciembre";}break;
+        }
         JSONObject jsonbody = new JSONObject();
         jsonbody.put("tipoIndicador", tipoIndicador);
         jsonbody.put("numeroSemana",numeroSemana);
         jsonbody.put("razonSocial",razonSocial);
         jsonbody.put("monto", Double.valueOf(monto));
         jsonbody.put("fecha", fecha);
+        jsonbody.put("mes",mes);
         try {
             URL nameUrl= new URL(urlindicador);
             byte[] body = jsonbody.toString().getBytes("UTF-8");
