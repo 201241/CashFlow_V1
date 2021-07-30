@@ -314,6 +314,10 @@ public class menuController implements Initializable
             }else if (btnSalidaDinero.isSelected() == true){
                 peticionCrearFlujoEfectivo("salida",fechanow);
             }
+            Alert advertencia = new Alert(Alert.AlertType.CONFIRMATION);
+            advertencia.setTitle("Registro exitoso");
+            advertencia.setHeaderText("se registro el flujo");
+            advertencia.show();
         }else{
             System.out.println("no se completo los campos");
         }
@@ -339,6 +343,10 @@ public class menuController implements Initializable
             SimpleDateFormat objfecha = new SimpleDateFormat(strDateFormat);
             String fechanoww = objfecha.format(fechaw);
             conexion.crearInidcador(check,nSemana,razonsocial,monto,fechanoww);
+            Alert advertencia = new Alert(Alert.AlertType.CONFIRMATION);
+            advertencia.setTitle("Registro exitoso");
+            advertencia.setHeaderText("se registro el indicador");
+            advertencia.show();
         }
 
     }
@@ -394,6 +402,10 @@ public class menuController implements Initializable
            System.out.println("creo la categoria");
            Conexion conexion = new Conexion();
            conexion.crearCategoria(selecioncomboClasificacion, catSeleccionada.getText(),subCatSeleccionada.getText());
+           Alert advertencia = new Alert(Alert.AlertType.CONFIRMATION);
+           advertencia.setTitle("Registro exitoso");
+           advertencia.setHeaderText("se registro la categoria");
+           advertencia.show();
        }
     }
 
