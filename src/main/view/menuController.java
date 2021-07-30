@@ -199,6 +199,12 @@ public class menuController implements Initializable
     @FXML
     private Button guardarBancos;
 
+    @FXML
+    private AnchorPane GenerarReporteAnchor;
+
+    @FXML private ComboBox<String> comboMeses;
+
+
     ObservableList<Categoria> categoriaObservableList = FXCollections.observableArrayList();
     ObservableList<flujoEfectivo> efectivoObservableList = FXCollections.observableArrayList();
     ObservableList<indicadorDinero> dineroObservableList = FXCollections.observableArrayList();
@@ -363,7 +369,7 @@ public class menuController implements Initializable
 
     @FXML
     void llamarReportes(ActionEvent event) {
-
+        GenerarReporteAnchor.setVisible(true);
     }
 
     @FXML
@@ -375,6 +381,11 @@ public class menuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<String> items = FXCollections.observableArrayList("Enero","Febrero","Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+        comboMeses.setItems(items);
+        comboMeses.valueProperty().addListener((observableValue, s, t1) -> {
+            selecioncomboClasificacion = t1;
+        });
 
     }
 
@@ -387,8 +398,39 @@ public class menuController implements Initializable
     }
 
 
+    @FXML
+    void cerrarVentanaReporte(){
+        GenerarReporteAnchor.setVisible(false);
+    }
 
+    @FXML
+    void generarPDF(){
+        if(comboMeses.getValue() != null){
+            solicitarDatos();
+        }else {
+            Alert advertencia = new Alert(Alert.AlertType.WARNING);
+            advertencia.setTitle("Campo obligatorio");
+            advertencia.setHeaderText("Debes seleccionar un mes");
+            advertencia.show();
+        }
+    }
 
+    public void solicitarDatos(){
+        //pagar cobrar banco
+        Conexion conex = new Conexion();
+        ObservableList<indicadorDinero> listaIndicadorDinero = FXCollections.observableArrayList();
+        listaIndicadorDinero = conex.getIndicador();
+        System.out.println( "Tamaño de indicadores: "+listaIndicadorDinero.size());
 
+        listaIndicadorDinero.forEach((data)->{
+            System.out.print(data.getTipoCuenta());
+
+            System.out.print(data.getNoSemana());
+
+            System.out.print(data.getRazonSocial());
+            System.out.print(data.getMonto());
+            System.out.println("");
+        });
+    }
 
 }
