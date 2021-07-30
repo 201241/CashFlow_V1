@@ -1,9 +1,6 @@
 package main.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class flujoEfectivo {
 
@@ -13,7 +10,7 @@ public class flujoEfectivo {
     private  Categoria categoria;
     private final DoubleProperty cantidad = new SimpleDoubleProperty();
     private final StringProperty idFlujoEfectivo = new SimpleStringProperty();
-    private final StringProperty numeroSemana = new SimpleStringProperty();
+    private final IntegerProperty numeroSemana = new SimpleIntegerProperty();
 
     //numeroSemana
 
@@ -26,7 +23,7 @@ public class flujoEfectivo {
         this.categoria = categoria;
     }
 
-    flujoEfectivo(String fecha, String tipoFlujo, String descripcion, Double cantidad, Categoria categoria, String idFlujoEfectivo, String numeroSemana){
+    flujoEfectivo(String fecha, String tipoFlujo, String descripcion, Double cantidad, Categoria categoria, String idFlujoEfectivo, Integer numeroSemana){
         this.fecha.set(fecha);
         this.tipoFlujo.set(tipoFlujo);
         this.descripcion.set(descripcion);
@@ -97,15 +94,15 @@ public class flujoEfectivo {
         this.cantidad.set(cantidad);
     }
 
-    public String getNumeroSemana() {
+    public Integer getNumeroSemana() {
         return numeroSemana.get();
     }
 
-    public StringProperty numeroSemanaProperty() {
+    public IntegerProperty numeroSemanaProperty() {
         return numeroSemana;
     }
 
-    public void setNumeroSemana(String numeroSemana) {
+    public void setNumeroSemana(Integer numeroSemana) {
         this.numeroSemana.set(numeroSemana);
     }
 }

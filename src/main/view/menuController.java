@@ -10,10 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
-import main.model.Categoria;
-import main.model.Conexion;
-import main.model.flujoEfectivo;
-import main.model.indicadorDinero;
+import main.model.*;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -109,6 +106,29 @@ public class menuController implements Initializable
 
     @FXML
     private TableColumn<flujoEfectivo, String> colSubEfectivo;
+    @FXML
+    private AnchorPane windowpdf;
+
+    @FXML
+    private TableView<Indicadores> tablacobrarpdf;
+
+    @FXML
+    private TableColumn<Indicadores, String> colrazonsocialpdf;
+
+    @FXML
+    private TableColumn<Indicadores, String> colsem1;
+
+    @FXML
+    private TableColumn<Indicadores, String> colsem2;
+
+    @FXML
+    private TableColumn<Indicadores, String> colsem3;
+
+    @FXML
+    private TableColumn<Indicadores, String> colsem4;
+
+    @FXML
+    private TableColumn<Indicadores, String> colsem5;
 
     @FXML
     private TextField txtsemanaCuentas;
@@ -389,11 +409,16 @@ public class menuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> items = FXCollections.observableArrayList("Enero","Febrero","Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-        comboMeses.setItems(items);
-        comboMeses.valueProperty().addListener((observableValue, s, t1) -> {
-            selecioncomboClasificacion = t1;
-        });
+
+        Conexion conexion = new Conexion();
+     ObservableList<Indicadores> list = conexion.pdf();
+        tablacobrarpdf.setItems(list);
+        colrazonsocialpdf.setCellValueFactory(celldata -> celldata.getValue().razonSocialProperty());
+        colsem1.setCellValueFactory(celldata -> celldata.getValue().getSemana().get(0).montoProperty().asString());
+        colsem2.setCellValueFactory(celldata -> celldata.getValue().getArraysemana().get(1).montoProperty().asString());
+        colsem3.setCellValueFactory(celldata -> celldata.getValue().getArraysemana().get(2).montoProperty().asString());
+        colsem4.setCellValueFactory(celldata -> celldata.getValue().getArraysemana().get(3).montoProperty().asString());
+        colsem5.setCellValueFactory(celldata -> celldata.getValue().getArraysemana().get(4).montoProperty().asString());
 
     }
 
@@ -406,6 +431,7 @@ public class menuController implements Initializable
            advertencia.setTitle("Registro exitoso");
            advertencia.setHeaderText("se registro la categoria");
            advertencia.show();
+           peticiongetCategorias();
        }
     }
 

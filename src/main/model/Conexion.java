@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,7 +82,7 @@ public class Conexion {
                String fecha = objectEfectivo.getString("fecha");
                String descripcion =objectEfectivo.getString("descripcion");
                Double cantidad = objectEfectivo.getDouble("cantidad");
-               String numeroSemana = objectEfectivo.getString("numeroSemana");
+               Integer numeroSemana = objectEfectivo.getInt("numeroSemana");
                 flujoEfectivo efectivo = new flujoEfectivo(fecha,tipoFlujo,descripcion,Double.valueOf(cantidad),categoriaaux,idFlujoEfectivo,numeroSemana);
                 listaFlujoEfectivo.add(efectivo);
             }
@@ -111,7 +112,7 @@ public class Conexion {
             JSONArray jsonResponse = new JSONArray(response.toString());
             for (int i = 0; i < jsonResponse.length() ; i++) {
                 JSONObject objectIndicador = jsonResponse.getJSONObject(i);
-                indicadorDinero dinero = new indicadorDinero(objectIndicador.getString("tipoIndicador"),objectIndicador.getString("numeroSemana"), objectIndicador.getString("razonSocial"), objectIndicador.getDouble("monto"), objectIndicador.getString("idIndicadoresDinero"), objectIndicador.getString("fecha"));
+                indicadorDinero dinero = new indicadorDinero(objectIndicador.getString("tipoIndicador"),objectIndicador.getInt("numeroSemana"), objectIndicador.getString("razonSocial"), objectIndicador.getDouble("monto"), objectIndicador.getString("idIndicadoresDinero"), objectIndicador.getString("fecha"));
                 listaIndicadorDinero.add(dinero);
             }
             return listaIndicadorDinero;
@@ -147,7 +148,7 @@ public class Conexion {
        jsonflujo.put("idCategoria", idCategoria);
         jsonflujo.put("descripcion",descripcion);
         jsonflujo.put("cantidad", Double.valueOf(cantidad));
-        jsonflujo.put("numeroSemana", numeroSemana);
+        jsonflujo.put("numeroSemana", Integer.valueOf(numeroSemana));
         jsonflujo.put("mes", mes);
        try {
            URL nameUrl= new URL(url);
@@ -192,7 +193,7 @@ public class Conexion {
         }
         JSONObject jsonbody = new JSONObject();
         jsonbody.put("tipoIndicador", tipoIndicador);
-        jsonbody.put("numeroSemana",numeroSemana);
+        jsonbody.put("numeroSemana",Integer.valueOf(numeroSemana));
         jsonbody.put("razonSocial",razonSocial);
         jsonbody.put("monto", Double.valueOf(monto));
         jsonbody.put("fecha", fecha);
@@ -250,5 +251,85 @@ public class Conexion {
             System.out.println(e);
         }
 
+    }
+
+
+    public  ObservableList<Indicadores> pdf(){
+        ObservableList<Indicadores> listaRazonSocial = FXCollections.observableArrayList();
+
+        try {
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        String url= "http://localhost:3005/indicadoresDinero/getCobrar";
+
+
+        try{
+            URL nameUrl= new URL(url);
+            HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+            StringBuilder aux = new StringBuilder();
+            String linea;
+            while ((linea = response.readLine()) != null){
+                aux.append(linea);
+                System.out.println(linea);
+            }
+            JSONArray ko = new JSONArray(aux.toString());
+            System.out.println("entro aqui");
+            for(int i=0; i<ko.length(); i++){
+                JSONObject objectIndicador= ko.getJSONObject(i);
+                Indicadores indi = new Indicadores( objectIndicador.getString("item"));
+                listaRazonSocial.add(indi);
+            }
+
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        ObservableList<Indicadores> item =traerDatosRazonSocial(listaRazonSocial);
+        return item;
+    }
+
+    public  ObservableList<Indicadores> traerDatosRazonSocial(ObservableList<Indicadores> list){
+
+        ArrayList<Semana> arraysemana = new ArrayList<Semana>();
+        String url= "http://localhost:3005/indicadoresDinero/getRazonSocial";
+        for(int i=0; i<list.size(); i++){
+            JSONObject jsonbody = new JSONObject();
+            jsonbody.put("razonSocial", list.get(i).getRazonSocial());
+            try {
+                URL nameUrl= new URL(url);
+                byte[] body = jsonbody.toString().getBytes("UTF-8");
+                HttpURLConnection connection = (HttpURLConnection)nameUrl.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+                connection.getOutputStream().write(body);
+                BufferedReader response = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+                StringBuilder aux = new StringBuilder();
+                String linea;
+                while ((linea = response.readLine()) != null){
+                    aux.append(linea);
+
+                }
+                JSONArray jsonArray = new JSONArray(aux.toString());
+
+                for(int p = 0; p<jsonArray.length(); p++){
+                    JSONObject objectIndicador = jsonArray.getJSONObject(p);
+                    Semana se = new Semana(objectIndicador.getInt("numeroSemana"), objectIndicador.getDouble("monto"));
+                    arraysemana.add(se);
+                }
+                list.get(i).setSemana(arraysemana);
+                response.close();
+            }catch (Exception e){
+
+            }
+        }
+
+        return list;
     }
 }

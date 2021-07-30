@@ -1,20 +1,17 @@
 package main.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class indicadorDinero {
 
     private final StringProperty tipoCuenta = new SimpleStringProperty();
-    private final StringProperty noSemana = new SimpleStringProperty();
+    private final IntegerProperty noSemana = new SimpleIntegerProperty();
     private final StringProperty razonSocial = new SimpleStringProperty();
     private final StringProperty idIndicador = new SimpleStringProperty();
     private final DoubleProperty monto = new SimpleDoubleProperty();
     private String fecha;
 
-    indicadorDinero(String tipoCuenta, String noSemana, String razonSocial, Double monto, String idIndicador,String fecha)
+    indicadorDinero(String tipoCuenta, Integer noSemana, String razonSocial, Double monto, String idIndicador,String fecha)
     {
         this.tipoCuenta.set(tipoCuenta);
         this.noSemana.set(noSemana);
@@ -44,15 +41,15 @@ public class indicadorDinero {
         this.tipoCuenta.set(tipoCuenta);
     }
 
-    public String getNoSemana() {
+    public Integer getNoSemana() {
         return noSemana.get();
     }
 
-    public StringProperty noSemanaProperty() {
+    public IntegerProperty noSemanaProperty() {
         return noSemana;
     }
 
-    public void setNoSemana(String noSemana) {
+    public void setNoSemana(Integer noSemana) {
         this.noSemana.set(noSemana);
     }
 
